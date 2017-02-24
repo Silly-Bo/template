@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //自定义一个字符串
+        var str = "我叫<% name %>,我<% age %>岁,我在<% school %>上学";
+        //创建对象
+        var obj = {
+            "name": "张三",
+            "age": 18,
+            "school": "蓝翔技校"
+        }
+        //  把上面的obj中的数据绑定到str中,输出完整的一句话
+        //  正则 认识<% value %>格式
+        var reg = /<%\s*([^%>]\S+)\s*%>/;
+        // 正则表达式一共有3种匹配的方法 test、exec、 match 下面用的是exec
+        var _exec = reg.exec(str); 
+        str = str.replace(_exec[0], obj[_exec[1]]);
+        console.log(str)
+        //这个时候看下浏览器打印出来的结果，已经将obj中的name绑定到了str中，再打印1次试试
+        var _exec = reg.exec(str);
+        str = str.replace(_exec[0], obj[_exec[1]]);
+        console.log(str)
+         //这个时候再看下浏览器打印出来的结果，已经将obj中的age绑定到了str中，再打印1次
+        var _exec = reg.exec(str);
+        str = str.replace(_exec[0], obj[_exec[1]]);
+        console.log(str)
+        //这个时候看下浏览器打印出来的结果打印输出了完整的一句话，已经完全将obj中的数据绑定到了str中
+
+        // 这个再打印一次看下返回结果 返回null  说明上一步已经打印结束了
+          var _exec = reg.exec(str);
+          console.log(_exec) //输出null
+          
+    </script>
+</body>
+
+</html>

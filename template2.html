@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/tempalte" id="tmpl">
+        我叫<% name %>，我<% age %>岁，我在<% school %>上学
+    </script>
+    <script>
+        //创建对象
+        var obj = {
+            "name": "张三",
+            "age": 18,
+            "school": "蓝翔技校"
+        }
+        //  把上面的obj中的数据绑定到str中,输出完整的一句话
+        //  正则 认识<% value %>格式
+        var reg = /<%\s*([^%>]\S+)\s*%>/;
+
+        function tempalte(id, obj) {
+            var html = document.getElementById(id).innerHTML;
+            var _exec = null;//初始化
+            while (_exec = (reg.exec(html))) {
+                html = html.replace(_exec[0], obj[_exec[1]]);
+            }
+            return html;
+        }
+        document.write(tempalte('tmpl', obj))
+    </script>
+
+</body>
+</html>
